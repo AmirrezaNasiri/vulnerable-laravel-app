@@ -1,0 +1,14 @@
+version: "3.4"
+services:
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3326:3306"
+    volumes:
+      - db:/var/lib/mysql
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+      MYSQL_DATABASE: "${DB_DATABASE}"
+volumes:
+  db:

