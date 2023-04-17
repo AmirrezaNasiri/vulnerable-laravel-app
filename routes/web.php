@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Product;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +15,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/products', function () {
+    $products = Product::where('name', 'like', '%'.request('name').'%');
+
+    return view('products ', [
+        'products' => $products->limit(10)->get()
+    ]);
+});
+
+Route::get('/read-some-jock', function () {
+    return view('csrf');
 });
